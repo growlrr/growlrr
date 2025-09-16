@@ -1,0 +1,15 @@
+{
+  "name": "growlrr-monorepo",
+  "version": "1.0.0",
+  "private": true,
+  "scripts": {
+    "dev": "cd frontend && pnpm run dev",
+    "build": "cd frontend && pnpm run build",
+    "start": "cd frontend && pnpm run start",
+    "install": "cd frontend && pnpm install && cd ../backend && pnpm install"
+  },
+  "workspaces": [
+    "frontend",
+    "backend"
+  ]
+}
