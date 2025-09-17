@@ -1,27 +1,40 @@
+import { useState } from "react";
+import Link from "next/link";
 import ProductCard from "../components/ProductCard";
 
-export default function HomePage() {
-  const items = [
-    { id: 1, title: "Sample Plan", desc: "Balanced diet plan" },
-    { id: 2, title: "Vet Notes", desc: "Example health tracker" },
-  ];
+export default function Home() {
+  const [showScroll, setShowScroll] = useState(false);
+
+  const handleScroll = () => {
+    if (window.scrollY > 200) setShowScroll(true);
+  };
+
+  if (typeof window !== "undefined") {
+    window.onscroll = handleScroll;
+  }
 
   return (
-    <div className="p-4">
-      <h1 className="text-2xl font-bold mb-4">Growlrr</h1>
-      <div className="space-y-4">
-        {items.map((it) => (
-          <div key={it.id} className="rounded-2xl shadow p-4 bg-white border">
-            <h2 className="font-semibold">{it.title}</h2>
-            <p className="text-gray-600">{it.desc}</p>
-          </div>
-        ))}
-      </div>
+    <div className="min-h-screen bg-gray-50">
+      <header className="p-4 shadow bg-white flex justify-between">
+        <h1 className="text-xl font-bold">Growlrr</h1>
+        <nav className="space-x-4">
+          <Link href="/diet">Diet</Link>
+          <Link href="/checkout">Checkout</Link>
+          <Link href="/ask">Ask Growlrr</Link>
+        </nav>
+      </header>
 
-      <div className="mt-8">
-        <h2 className="font-semibold mb-2">Sample Product</h2>
-        <ProductCard />
-      </div>
+      <main className="p-6 grid grid-cols-1 md:grid-cols-3 gap-4">
+        <ProductCard
+          product={{ name: "Sample Can", ingredients: "Chicken, Rice, Carrots" }}
+        />
+      </main>
+
+      {showScroll && (
+        <footer className="p-6 text-center text-gray-500">
+          <p>End of feed</p>
+        </footer>
+      )}
     </div>
   );
 }
