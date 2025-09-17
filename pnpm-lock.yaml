@@ -7,7 +7,6 @@ settings:
 importers:
 
   .: {}
-<<<<<<< HEAD
 
   backend:
     dependencies:
@@ -1311,5 +1310,3 @@ snapshots:
   yallist@4.0.0: {}
 
   zod@3.21.4: {}
-=======
->>>>>>> 992a68d (fix: update pnpm lockfile for vercel build)
