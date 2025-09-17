@@ -1,7 +1,6 @@
 import ProductCard from "../components/ProductCard";
 
 export default function Home({ sampleProducts = [] }) {
-  // ensure there's at least one fallback product for prerender/build
   const products = (sampleProducts && sampleProducts.length > 0)
     ? sampleProducts
     : [{ id: 1, name: "Sample Can (fallback)", description: "Fallback product for build" }];
@@ -12,7 +11,6 @@ export default function Home({ sampleProducts = [] }) {
         <h1 className="text-xl font-bold">Growlrr</h1>
         <nav className="space-x-4">
           <a href="/diet">Diet</a>
-          <a href="/products">Products</a>
           <a href="/checkout">Checkout</a>
           <a href="/ask">Ask Growlrr</a>
         </nav>
@@ -29,19 +27,17 @@ export default function Home({ sampleProducts = [] }) {
   );
 }
 
-// optional SSG data fetch with fallback: safe for Vercel prerender
 export async function getStaticProps() {
   let sampleProducts = [];
+  // try fetching from backend but tolerate failure
   try {
     const res = await fetch(process.env.BACKEND_URL?.concat("/v1/products") ?? "https://growlrr-backend.onrender.com/v1/products");
     if (res.ok) {
       const json = await res.json();
-      // If API returns object with products field, normalize
       sampleProducts = Array.isArray(json) ? json : json?.products ?? [];
     }
   } catch (e) {
-    // swallow: we'll use fallback below
-    console.error("getStaticProps products fetch failed:", e?.message || e);
+    // ignore - fallback will be used
   }
 
   if (!sampleProducts || sampleProducts.length === 0) {

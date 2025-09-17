@@ -1,5 +1,5 @@
 export default function ProductCard({ product }) {
-  if (!product) {
+  if (!product || typeof product !== "object") {
     return (
       <div className="p-4 border rounded shadow text-gray-500">
         <div className="font-semibold">No product</div>
@@ -7,9 +7,7 @@ export default function ProductCard({ product }) {
       </div>
     );
   }
-
   const { name = "Unnamed", description = "No description" } = product;
-
   return (
     <div className="p-4 border rounded shadow hover:shadow-lg transition">
       <h3 className="text-lg font-semibold">{name}</h3>
