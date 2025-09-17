@@ -25,6 +25,14 @@ try {
 app.get('/', (req, res) => res.send('Growlrr API — use /v1/* routes'));
 
 // listen on Render/localhost port
+
+// Ask Growlrr (chat) router
+const askRouter = require('./routes/ask');
+app.use('/v1/ask', askRouter);
+
+// Orders router
+const ordersRouter = require('./routes/orders');
+app.use('/v1/orders', ordersRouter);
 const PORT = process.env.PORT || 4000;
 app.listen(PORT, () => {
   console.log(`Backend running on :${PORT}`);
