@@ -1,18 +1,20 @@
-import { useState } from "react";
-
 export default function ProductCard({ product }) {
-  const [flipped, setFlipped] = useState(false);
+  if (!product) {
+    return (
+      <div className="p-4 border rounded shadow text-gray-500">
+        No product data
+      </div>
+    );
+  }
 
   return (
-    <div
-      className="bg-white p-4 shadow rounded cursor-pointer"
-      onClick={() => setFlipped(!flipped)}
-    >
-      {!flipped ? (
-        <h2 className="font-bold">{product.name}</h2>
-      ) : (
-        <p>{product.ingredients}</p>
-      )}
+    <div className="p-4 border rounded shadow hover:shadow-lg transition">
+      <h3 className="text-lg font-semibold">
+        {product.name || "Unnamed"}
+      </h3>
+      <p className="text-sm text-gray-500">
+        {product.description || "No description available"}
+      </p>
     </div>
   );
 }

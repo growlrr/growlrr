@@ -1,27 +1,44 @@
-import Navbar from "../components/Navbar";
 import ProductCard from "../components/ProductCard";
 
-const SKUS = [
-  { sku: "chicken_cuts", name: "Chicken Cuts in Bone Broth", short: "Lean muscle cuts, slow-broth.", kcal: 95 },
-  { sku: "lamb_cuts", name: "Lamb Cuts in Bone Broth", short: "Rich and savory muscle cuts.", kcal: 110 },
-  { sku: "sardines", name: "Sardines in Spring Water", short: "Omega-rich whole sardines.", kcal: 105 },
-  { sku: "hearts", name: "Hearts in Bone Broth", short: "Taurine-dense organ meat.", kcal: 100 },
-  { sku: "gizzards", name: "Gizzards in Bone Broth", short: "Dense, zinc-rich gizzards.", kcal: 98 },
-  { sku: "liver", name: "Liver Pâté in Bone Broth with Egg & Pumpkin", short: "Vitamin-rich pate.", kcal: 120 },
-  { sku: "kidney", name: "Kidney in Bone Broth with Egg & Pumpkin", short: "Iron & B12 organ mix.", kcal: 115 }
-];
-
-export default function Products() {
+export default function ProductsPage({ products }) {
   return (
-    <div style={{ padding: 24 }}>
-      <Navbar />
-      <h1 style={{ fontFamily: "serif" }}>Our Products</h1>
-      <p style={{ color: "#555", maxWidth: 800 }}>Click a product to see details. Packaging and labels are subject to final design.</p>
-
-      <div style={{ display: "flex", flexWrap: "wrap", marginTop: 16 }}>
-        {SKUS.map(p => <ProductCard key={p.sku} {...p} />)}
+    <div className="max-w-3xl mx-auto p-6">
+      <h1 className="text-2xl font-bold mb-6">Products</h1>
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+        {products.map((p) => (
+          <ProductCard key={p.id} product={p} />
+        ))}
       </div>
     </div>
   );
 }
 
+export async function getStaticProps() {
+  let products = [];
+
+  try {
+    const res = await fetch(
+      process.env.BACKEND_URL
+        ? `${process.env.BACKEND_URL}/v1/products`
+        : "https://growlrr-backend.onrender.com/v1/products"
+    );
+    if (res.ok) {
+      products = await res.json();
+    }
+  } catch (err) {
+    console.error("Failed to fetch products:", err);
+  }
+
+  // fallback sample if API is empty or errors
+  if (!products || products.length === 0) {
+    products = [
+      {
+        id: 1,
+        name: "Sample Can",
+        description: "Placeholder product for build"
+      }
+    ];
+  }
+
+  return { props: { products } };
+}
