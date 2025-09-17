@@ -1,25 +1,12 @@
 import Navbar from "../components/Navbar";
-
-const VALUES = [
-  { title: "Transparency", blurb: "Full ingredient lists, lab-tested nutrition values, and open sourcing of templates." },
-  { title: "Quality", blurb: "Ethically sourced proteins, slow-broth process, no fillers." },
-  { title: "Science-led", blurb: "Nutrition templates reviewed by vets and nutritionists." }
-];
-
 export default function Values() {
   return (
-    <div style={{ padding: 24 }}>
+    <div>
       <Navbar />
-      <h1>Our Core Values</h1>
-      <div style={{ display: "flex", gap: 12, marginTop: 12 }}>
-        {VALUES.map(v => (
-          <div key={v.title} style={{ padding: 12, borderRadius: 10, boxShadow: "0 6px 18px rgba(0,0,0,0.06)", minWidth: 220 }}>
-            <h3>{v.title}</h3>
-            <p style={{ color: "#444" }}>{v.blurb}</p>
-          </div>
-        ))}
-      </div>
+      <main className="max-w-3xl mx-auto p-6">
+        <h1 className="text-2xl font-bold mb-4">Our Values</h1>
+        <p>Transparency • Quality • Science-led. Full ingredient lists, vet-reviewed templates, and ethical sourcing.</p>
+      </main>
     </div>
   );
 }
-
