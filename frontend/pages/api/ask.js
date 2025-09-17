@@ -1,7 +1,8 @@
-export default function handler(req, res) {
-  if (req.method === "POST") {
+export default function handler(req,res){
+  if (req.method==='POST') {
+    // minimal placeholder so UI doesn't crash
     return res.status(200).json({ answer: "Coming soon..." });
   }
-  res.setHeader("Allow", "POST");
+  res.setHeader("Allow","POST");
   res.status(405).json({ error: "Method not allowed" });
 }

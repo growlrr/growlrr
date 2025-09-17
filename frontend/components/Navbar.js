@@ -2,21 +2,23 @@ import Link from "next/link";
 
 export default function Navbar() {
   return (
-    <header className="p-4 shadow bg-white flex justify-between items-center">
-      <div className="flex items-center space-x-3">
-        <div className="text-2xl font-bold">Growlrr</div>
-        <div className="text-sm text-red-500">Growl with us ♥</div>
+    <header style={{borderBottom:'1px solid #eee'}} className="p-4 bg-white">
+      <div style={{maxWidth:1100, margin:'0 auto', display:'flex', alignItems:'center', justifyContent:'space-between'}}>
+        <div style={{display:'flex', alignItems:'center', gap:12}}>
+          <div style={{fontWeight:800, fontSize:20}}>Growlrr</div>
+          <div style={{color:'#e11d48', fontSize:14}}>Growl with us ♥</div>
+        </div>
+        <nav style={{display:'flex', gap:18, fontSize:14}}>
+          <Link href="/"><a>Home</a></Link>
+          <Link href="/pet"><a>Pet</a></Link>
+          <Link href="/diet"><a>Diet</a></Link>
+          <Link href="/crowdfund"><a>Crowdfund</a></Link>
+          <Link href="/checkout"><a>Checkout</a></Link>
+          <Link href="/about"><a>About Us</a></Link>
+          <Link href="/values"><a>Values</a></Link>
+          <Link href="/products"><a>Products</a></Link>
+        </nav>
       </div>
-      <nav className="space-x-4 text-sm">
-        <Link href="/">Home</Link>
-        <Link href="/pet">Pet</Link>
-        <Link href="/diet">Diet</Link>
-        <Link href="/crowdfund">Crowdfund</Link>
-        <Link href="/checkout">Checkout</Link>
-        <Link href="/about">About Us</Link>
-        <Link href="/values">Values</Link>
-        <Link href="/products">Products</Link>
-      </nav>
     </header>
   );
 }
