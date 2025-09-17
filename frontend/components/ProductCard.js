@@ -1,15 +1,14 @@
 export default function ProductCard({ product }) {
-  // Defensive: always handle missing product gracefully (server + client safe)
-  if (!product || typeof product !== "object") {
+  if (!product) {
     return (
       <div className="p-4 border rounded shadow text-gray-500">
         <div className="font-semibold">No product</div>
-        <div className="text-sm">Placeholder product — data not available.</div>
+        <div className="text-sm">Fallback — data not available</div>
       </div>
     );
   }
 
-  const { name = "Unnamed product", description = "No description available" } = product;
+  const { name = "Unnamed", description = "No description" } = product;
 
   return (
     <div className="p-4 border rounded shadow hover:shadow-lg transition">
