@@ -1,28 +1,30 @@
-import Link from "next/link";
+import { useState } from "react";
 
-export default function ProductCard({ sku, name, short, kcal }) {
+export default function ProductCard() {
+  const [flipped, setFlipped] = useState(false);
+
   return (
-    <Link href={`/products/${sku}`} style={{ textDecoration: "none", color: "inherit" }}>
-      <div style={{
-        width: 220,
-        borderRadius: 12,
-        boxShadow: "0 6px 18px rgba(0,0,0,0.08)",
-        padding: 16,
-        margin: 12,
-        background: "#fff",
-        display: "flex",
-        flexDirection: "column",
-        gap: 8,
-        cursor: "pointer"
-      }}>
-        <div style={{ height: 120, borderRadius: 8, background: "#f6f4f1", display:"flex",alignItems:"center",justifyContent:"center", fontSize:24 }}>
-          {name.split(" ")[0]}
+    <div
+      className="w-48 h-64 relative cursor-pointer [perspective:1000px]"
+      onClick={() => setFlipped(!flipped)}
+    >
+      <div
+        className={`absolute w-full h-full transition-transform duration-500 transform ${
+          flipped ? "[transform:rotateY(180deg)]" : ""
+        }`}
+      >
+        <div className="absolute w-full h-full [backface-visibility:hidden] bg-white shadow rounded-xl flex items-center justify-center">
+          <p className="font-bold">Sample Can</p>
         </div>
-        <div style={{ fontWeight: 700 }}>{name}</div>
-        <div style={{ fontSize: 13, color: "#555" }}>{short}</div>
-        <div style={{ marginTop: "auto", fontSize: 13, color: "#333" }}>~{kcal} kcal / can</div>
+        <div className="absolute w-full h-full [backface-visibility:hidden] [transform:rotateY(180deg)] bg-gray-50 shadow rounded-xl p-4">
+          <h2 className="font-semibold">Ingredients</h2>
+          <ul className="text-sm mt-2 list-disc list-inside">
+            <li>Chicken</li>
+            <li>Rice</li>
+            <li>Vitamins</li>
+          </ul>
+        </div>
       </div>
-    </Link>
+    </div>
   );
 }
-

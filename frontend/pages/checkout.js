@@ -1,12 +1,8 @@
-import Navbar from "../components/Navbar";
-
-export default function Checkout() {
+export default function CheckoutPage() {
   return (
-    <div>
-      <Navbar />
-      <h1>🛒 Checkout</h1>
-      <p>Here you’ll review your order and make payment.</p>
+    <div className="p-4">
+      <h1 className="text-xl font-bold mb-4">Checkout</h1>
+      <p>Here you can + / - cans just like Amazon/Flipkart cart.</p>
     </div>
   );
 }
-
