@@ -1,19 +1,19 @@
-const express = require("express");
-const bodyParser = require("body-parser");
-const cors = require("cors");
+const express = require('express');
+const cors = require('cors');
+
 const app = express();
-const PORT = process.env.PORT || 4000;
-
+app.use(express.json());
 app.use(cors());
-app.use(bodyParser.json());
 
-// Routes
-app.get("/v1/health", (req, res) => res.json({ status: "ok" }));
-app.use("/v1/auth", require("./routes/auth"));
-app.use("/v1/pets", require("./routes/pets"));
-app.use("/v1/diets", require("./routes/diets"));
-app.use("/v1/orders", require("./routes/orders"));
-app.use("/v1/crowdfund", require("./routes/crowdfund"));
+// --- Put your API routes here ---
+// Example placeholder endpoints (keep your real routes too)
+app.get('/v1/health', (req, res) => {
+  res.json({ status: 'ok' });
+});
+
+// (Optional) if you have other routers, require and use them here:
+// const petsRouter = require('./routes/pets');
+// app.use('/v1/pets', petsRouter);
 
 const PORT = process.env.PORT || 4000;
 app.listen(PORT, () => {
