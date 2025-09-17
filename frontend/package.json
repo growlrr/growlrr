@@ -2,7 +2,9 @@
   "name": "growlrr-frontend",
   "version": "1.0.0",
   "scripts": {
-    "dev": "next dev -H 0.0.0.0 -p 3000"
+    "dev": "next dev -H 0.0.0.0 -p 3000",
+    "build": "next build",
+    "start": "next start"
   },
   "dependencies": {
     "next": "13.4.0",
@@ -10,4 +12,3 @@
     "react-dom": "18.2.0"
   }
 }
-
